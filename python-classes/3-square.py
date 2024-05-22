@@ -3,6 +3,7 @@
 This module defines the Square class.
 """
 
+
 class Square:
     """Square Class
 
@@ -38,4 +39,3 @@ class Square:
 
         """
         return self.__size ** 2
-
