@@ -1,4 +1,7 @@
 #!/usr/bin/python3
+"""
+This module provides a Rectangle class for storing rectangle data.
+"""
 
 
 class Rectangle():
