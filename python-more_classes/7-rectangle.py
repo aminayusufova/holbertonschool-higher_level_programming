@@ -4,6 +4,7 @@ This module provides a Rectangle class
 for storing and manipulating rectangle data.
 """
 
+
 class Rectangle():
     """rectangle class for storing rectangle data
     """
