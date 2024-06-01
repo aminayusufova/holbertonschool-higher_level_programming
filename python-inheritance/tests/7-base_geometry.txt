@@ -1,26 +1,34 @@
-============================
-TESTS FOR 7-base_geometry.py
-============================
+The "7-base_geometry" doctest
+========================
+Imports "BaseGeometry" class from "7-base_geometry"
+Test integer_validator method
+
 >>> BaseGeometry = __import__('7-base_geometry').BaseGeometry
+
 >>> bg = BaseGeometry()
->>> bg.integer_validator("custom_int", 12)
+>>> bg.integer_validator("my_int", 12)
+>>> bg.integer_validator("width", 89)
 
->>> bg.integer_validator("none", None)
-Traceback (most recent call last):
-	...
-TypeError: none must be an integer
+>>> try:
+...     bg.integer_validator("name", "John")
+... except Exception as e:
+...     print("[{}] {}".format(e.__class__.__name__, e))
+[TypeError] name must be an integer
 
->>> bg.integer_validator("neg", -40)
-Traceback (most recent call last):
-	...
-ValueError: neg must be greater than 0
+>>> try:
+...     bg.integer_validator("age", 0)
+... except Exception as e:
+...     print("[{}] {}".format(e.__class__.__name__, e))
+[ValueError] age must be greater than 0
 
->>> bg.integer_validator("float", 4.5)
-Traceback (most recent call last):
-	...
-TypeError: float must be an integer
+>>> try:
+...     bg.integer_validator("distance", -4)
+... except Exception as e:
+...     print("[{}] {}".format(e.__class__.__name__, e))
+[ValueError] distance must be greater than 0
 
->>> bg.integer_validator("zero", 0)
-Traceback (most recent call last):
-	...
-ValueError: zero must be greater than 0
+>>> try:
+...     bg.area()
+... except Exception as e:
+...     print("[{}] {}".format(e.__class__.__name__, e))
+[Exception] area() is not implemented
