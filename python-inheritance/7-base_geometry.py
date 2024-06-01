@@ -4,19 +4,16 @@ This module defines a base class for geometric shapes.
 """
 
 
-class BaseGeometry():
-    """for use with shapes. Super class.
-    """
+class BaseGeometry:
+    """ BaseGeometry class empty """
 
     def area(self):
-        """instance method to calculate area of shape
-        """
+        """ raise an exception """
         raise Exception("area() is not implemented")
 
     def integer_validator(self, name, value):
-        """validates integer input
-        """
-        if type(value) != int:
-            raise TypeError(name + " must be an integer")
+        """ validates value is an integer """
+        if type(value) is not int:
+            raise TypeError("{} must be an integer".format(name))
         elif value <= 0:
-            raise ValueError(name + " must be greater than 0")
+            raise ValueError("{} must be greater than 0".format(name))
