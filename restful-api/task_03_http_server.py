@@ -23,6 +23,7 @@ class SimpleHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
             self.end_headers()
             status_data = {"status": "OK"}
             self.wfile.write(json.dumps(status_data).encode())
+            return 'OK', 200
         elif self.path == '/info':
             self.send_response(HTTPStatus.OK)
             self.send_header('Content-type', 'application/json')
@@ -35,6 +36,7 @@ class SimpleHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
             self.end_headers()
             error_data = {"error": "Endpoint not found"}
             self.wfile.write(json.dumps(error_data).encode())
+            return 'Not Found', 404
 
 def run(server_class=http.server.HTTPServer, handler_class=SimpleHTTPRequestHandler, port=8000):
     server_address = ('', port)
