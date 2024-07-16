@@ -1,39 +1,26 @@
-import os
-
+#!/usr/bin/python3
 
 def generate_invitations(template, attendees):
-    #check input types
     if not isinstance(template, str):
-        print("Error: Template must be a string.")
+        print("Template should be a string")
         return
-    if not isinstance(attendees, list) or not all(isinstance(attendee, dict) for attendee in attendees):
-        print("Error: Attendees must be a list of dictionaries.")
+    if not isinstance(attendees, list):
+        print("Attendees should be a list")
         return
-
-    #handling empty inputs
     if not template:
         print("Template is empty, no output files generated.")
         return
     if not attendees:
         print("No data provided, no output files generated.")
         return
-
-    #process each attendee
-    for index, attendee in enumerate(attendees, start=1):
-        processed_template = template[:]
-        for placeholder, value in attendee.items():
-            processed_template = processed_template.replace(f"{{{placeholder}}}", value if value is not None else "N/A")
-
-        # Check for any remaining placeholders and replace them with "N/A"
-        processed_template = processed_template.replace("{", "").replace("}", "N/A")
-        # Check if file already exists
-        if os.path.exists(f"output_{index}.txt"):
-            print(f"Error: File output_{index}.txt already exists.")
-            continue
-
-        #generating output files
-        try:
-            with open(f"output_{index}.txt", "w") as file:
-                file.write(processed_template)
-        except IOError as e:
-            print(f"Error: Failed to write to file output_{index}.txt - {e}")
+    
+    for i, attende in enumerate(attendees, start=1):
+        content = template
+        for placeholder in ["name", "event_title", "event_date", "event_location"]:
+                value = attende.get(placeholder, "N/A")
+                content = content.replace(f"{{{placeholder}}}", value if value else "N/A")
+        
+        output_filename = f"output_{i}.txt"
+        with open(output_filename, "w") as output_file:
+            output_file.write(content)
+        print(f"Generated {output_filename}")
